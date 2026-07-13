@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-store" />
+<title>Hospital Queue Agent</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  :root{--ink:#16263a;--blue:#1f5fae;--bg:#f6f8fb;--card:#fff;--muted:#5b6b7d;--line:#e3e9f0;--green:#2e9e5b;--red:#e23b3b;--amber:#b8860b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  .wrap{max-width:920px;margin:0 auto;padding:18px}
+  header{background:linear-gradient(135deg,#16263a,#1f5fae);color:#fff;padding:22px 18px}
+  header h1{font-size:22px;font-weight:900}
+  header p{opacity:.9;font-size:13px;margin-top:4px}
+  .badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);padding:3px 10px;border-radius:999px;font-size:11px;margin-top:8px;margin-right:6px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}
+  input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:15px;font-family:inherit}
+  .chips{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+  .chip{background:#eef3fa;color:var(--blue);border:1px solid #d6e2f5;border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer}
+  button.go{margin-top:10px;background:var(--blue);color:#fff;font-weight:800;border:none;border-radius:10px;padding:12px 20px;font-size:15px;cursor:pointer}
+  button.call{background:var(--green)}
+  .trace{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+  .step{border-left:3px solid var(--line);padding:6px 10px;margin:6px 0;background:#fafcff;border-radius:0 8px 8px 0}
+  .step.join,.step.call_patient,.step.report_position{border-color:var(--blue)}
+  .step.surge_detected{border-color:var(--red)} .step.notify_voice,.step.notify_sms{border-color:var(--amber)} .step.think{border-color:#7a4fd0} .step.done{border-color:var(--amber)}
+  .step b{font-size:11px;text-transform:uppercase;color:var(--muted)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .q{text-align:center}
+  .q img{width:160px;height:160px;border:1px solid var(--line);border-radius:12px}
+  .surge{background:#fde2e2;color:var(--red);border:1px solid #f5c2c2;border-radius:10px;padding:12px;font-weight:700}
+  .ok{background:#e3f3e8;color:var(--green);border-radius:10px;padding:10px}
+  .tk{display:flex;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-top:6px;background:#fff}
+  .tk .id{font-weight:800;color:var(--blue)}
+  .st{font-size:10px;padding:2px 7px;border-radius:999px;font-weight:700}
+  .waiting{background:#fff4d6;color:var(--amber)} .called{background:#e3edff;color:var(--blue)} .done{background:#e3f3e8;color:var(--green)}
+  h3{font-size:14px;color:var(--muted);margin:14px 0 4px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect}=React;
+function App(){
+  const [patient,setPatient]=useState('');
+  const [trace,setTrace]=useState([]);
+  const [mem,setMem]=useState({queue:[],notifications:[],surge:{active:false},cfg:{surgeThreshold:8}});
+  const [busy,setBusy]=useState(false);
+  const channels=[['site','サイト'],['qr','QR'],['whatsapp','WhatsApp'],['voice','音声電話'],['sms','SMS'],['message','メッセージ']];
+  async function refresh(){ const s=await fetch('/api/state').then(r=>r.json()); setMem(s); }
+  useEffect(()=>{refresh();},[]);
+  async function intake(ch){
+    if(!patient.trim())return; setBusy(true); setTrace([]);
+    try{
+      const r=await fetch('/api/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({patient:patient.trim(),channel:ch})});
+      const d=await r.json();
+      for(const s of d.steps){ setTrace(prev=>[...prev,s]); await new Promise(res=>setTimeout(res,300)); }
+      setPatient('');
+    }catch(e){ setTrace([{tool:'error',result:e.message}]); }
+    setBusy(false); refresh();
+  }
+  async function callNext(){ setBusy(true); const r=await fetch('/api/call_next',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).then(r=>r.json()); setTrace(r.steps); setBusy(false); refresh(); }
+  const waiting=mem.queue.filter(q=>q.status==='waiting').length;
+  const surge=waiting>=mem.cfg.surgeThreshold;
+  const checkinUrl='http://129.121.122.53:8094/';
+  return (
+    <div>
+      <header><div className="wrap" style={{padding:0}}>
+        <h1>🏥 Hospital Queue Agent</h1>
+        <p>多チャネル受付（サイト・QR・WhatsApp・音声・SMS）＋混雑時の音声/SMS自動通知</p>
+        <span className="badge">チャネル: 6</span>
+        <span className="badge">混雑閾値: {mem.cfg.surgeThreshold}人</span>
+      </div></header>
+      <div className="wrap">
+        <div className="card">
+          <h3 style={{marginTop:0}}>患者受付（氏名または番号）</h3>
+          <input value={patient} onChange={e=>setPatient(e.target.value)} placeholder="例：山田 太郎 / 090-1234-5678" />
+          <div className="chips">{channels.map(([c,n])=><span key={c} className="chip" onClick={()=>intake(c)}>{n}で受付</span>)}</div>
+          <button className="go call" disabled={busy} onClick={callNext}>次の患者を呼び出し ▶</button>
+        </div>
+        {trace.length>0&&<div className="card"><h3 style={{marginTop:0}}>エージェント処理</h3>
+          <div className="trace">{trace.map((s,i)=><div key={i} className={'step '+s.tool}><b>{s.tool}</b><div>{s.result}</div></div>)}</div>
+        </div>}
+        <div className="grid2">
+          <div className="card q">
+            <h3 style={{marginTop:0}}>受付QRコード</h3>
+            <img src={'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data='+encodeURIComponent(checkinUrl)} alt="QR" />
+            <p style={{fontSize:12,color:'#5b6b7d',marginTop:6}}>入口に掲示 → スマホで自受付</p>
+          </div>
+          <div className="card">
+            <h3 style={{marginTop:0}}>混雑監視</h3>
+            {surge? <div className="surge">⚠️ 混雑検知：待ち {waiting}人 — 音声/SMSで通知中</div> : <div className="ok">✅ 通常：待ち {waiting}人</div>}
+            <h3>通知履歴</h3>
+            {(mem.notifications||[]).slice(0,6).map((n,i)=><div key={i} className="tk" style={{fontSize:11}}><span>[{n.type}] {n.channel} · 待ち{n.waiting}人</span></div>)}
+          </div>
+        </div>
+        <div className="card"><h3 style={{marginTop:0}}>待合せ列（Queue）</h3>
+          {mem.queue.map(q=><div key={q.id} className="tk"><div><span className="id">{q.id}</span> · {q.patient} <small style={{color:'#5b6b7d'}}>({q.channel})</small></div><span className={'st '+q.status}>{q.status}</span></div>)}
+          {!mem.queue.length&&<small style={{color:'#5b6b7d'}}>受付がありません</small>}
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
