@@ -6,6 +6,7 @@ const { intake, callNext, queryPosition, getMemory, checkSurge } = require('./ag
 
 const PUBLIC = path.join(__dirname, 'public');
 const MIME = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json' };
+const { limited } = require('./ratelimit');
 function send(res, code, body, type = 'application/json') {
   res.writeHead(code, { 'Content-Type': type });
   if (Buffer.isBuffer(body)) return res.end(body);
@@ -14,6 +15,7 @@ function send(res, code, body, type = 'application/json') {
 }
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost');
+  if (req.method === 'POST' && limited(req.socket.remoteAddress)) return send(res, 429, { error: 'rate limit' });
   async function body() { let b = ''; for await (const c of req) b += c; try { return JSON.parse(b || '{}'); } catch { return {}; } }
   if (req.method === 'POST' && url.pathname === '/api/intake') {
     const b = await body();
@@ -36,4 +38,18 @@ const server = http.createServer(async (req, res) => {
   return send(res, 404, { error: 'not found' });
 });
 const PORT = 8094;
-server.listen(PORT, '0.0.0.0', () => console.log('Hospital Agent on ' + PORT));
+server.listen(PORT, '0.0.0.0', () => {
+  console.log('Hospital Agent on ' + PORT);
+  // Surge re-notify loop: if still surging and >5 min since last notify, re-alert.
+  setInterval(() => {
+    const s = checkSurge();
+    if (s.surge) {
+      const since = Date.now() - (getMemory().surge.lastNotified || 0);
+      if (since > 300000) {
+        addNotification({ type: 'surge-reminder', channel: 'voice+sms', waiting: s.waiting });
+        getMemory().surge.lastNotified = Date.now();
+        console.log('[surge-reminder] still surging:', s.waiting);
+      }
+    }
+  }, 60000);
+});
