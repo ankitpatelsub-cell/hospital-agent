@@ -3,6 +3,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { intake, callNext, queryPosition, getMemory, checkSurge } = require('./agent-core');
+const { addNotification } = require('./memory');
 
 const PUBLIC = path.join(__dirname, 'public');
 const MIME = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json' };
