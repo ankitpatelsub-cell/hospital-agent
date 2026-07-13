@@ -20,9 +20,9 @@ const server = http.createServer(async (req, res) => {
   async function body() { let b = ''; for await (const c of req) b += c; try { return JSON.parse(b || '{}'); } catch { return {}; } }
   if (req.method === 'POST' && url.pathname === '/api/intake') {
     const b = await body();
-    const patient = (b.patient || '').trim(); const channel = (b.channel || 'site');
+    const patient = (b.patient || '').trim(); const channel = (b.channel || 'site'); const locale = (b.locale || 'ja');
     if (!patient) return send(res, 400, { error: 'no patient' });
-    const r = intake(patient, channel);
+    const r = intake(patient, channel, locale);
     return send(res, 200, { steps: r.steps, entry: r.entry, pos: r.pos });
   }
   if (req.method === 'POST' && url.pathname === '/api/call_next') {
