@@ -1,0 +1,752 @@
+{
+  "queue": [
+    {
+      "id": "Q001",
+      "patient": "山田 太郎",
+      "channel": "site",
+      "joinedAt": 1783935542608,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q002",
+      "patient": "患者whatsapp",
+      "channel": "whatsapp",
+      "joinedAt": 1783935542652,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q003",
+      "patient": "患者voice",
+      "channel": "voice",
+      "joinedAt": 1783935542665,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q004",
+      "patient": "患者sms",
+      "channel": "sms",
+      "joinedAt": 1783935542675,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q005",
+      "patient": "患者message",
+      "channel": "message",
+      "joinedAt": 1783935542686,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q006",
+      "patient": "患者qr",
+      "channel": "qr",
+      "joinedAt": 1783935542695,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q007",
+      "patient": "患者site",
+      "channel": "site",
+      "joinedAt": 1783935542704,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q008",
+      "patient": "患者whatsapp",
+      "channel": "whatsapp",
+      "joinedAt": 1783935542713,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q009",
+      "patient": "患者voice",
+      "channel": "voice",
+      "joinedAt": 1783935542725,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q010",
+      "patient": "患者sms",
+      "channel": "sms",
+      "joinedAt": 1783935542734,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q011",
+      "patient": "鈴木",
+      "channel": "qr",
+      "joinedAt": 1783935550348,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q012",
+      "patient": "患者の受付をQRで行って",
+      "channel": "message",
+      "joinedAt": 1783943005546,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q013",
+      "patient": "p-whatsapp",
+      "channel": "whatsapp",
+      "joinedAt": 1783943206701,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q014",
+      "patient": "p-voice",
+      "channel": "voice",
+      "joinedAt": 1783943206714,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q015",
+      "patient": "p-sms",
+      "channel": "sms",
+      "joinedAt": 1783943206723,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q016",
+      "patient": "p-message",
+      "channel": "message",
+      "joinedAt": 1783943206732,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q017",
+      "patient": "p-qr",
+      "channel": "qr",
+      "joinedAt": 1783943206742,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q018",
+      "patient": "p-site",
+      "channel": "site",
+      "joinedAt": 1783943206752,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q019",
+      "patient": "p-whatsapp",
+      "channel": "whatsapp",
+      "joinedAt": 1783943206761,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q020",
+      "patient": "p-voice",
+      "channel": "voice",
+      "joinedAt": 1783943206770,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q021",
+      "patient": "p-sms",
+      "channel": "sms",
+      "joinedAt": 1783943206779,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q022",
+      "patient": "p-qr",
+      "channel": "qr",
+      "joinedAt": 1783943206789,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q023",
+      "patient": "p-whatsapp",
+      "channel": "whatsapp",
+      "joinedAt": 1783943303700,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q024",
+      "patient": "p-voice",
+      "channel": "voice",
+      "joinedAt": 1783943303715,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q025",
+      "patient": "p-sms",
+      "channel": "sms",
+      "joinedAt": 1783943303724,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q026",
+      "patient": "p-message",
+      "channel": "message",
+      "joinedAt": 1783943303732,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q027",
+      "patient": "p-qr",
+      "channel": "qr",
+      "joinedAt": 1783943303741,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q028",
+      "patient": "p-site",
+      "channel": "site",
+      "joinedAt": 1783943303749,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q029",
+      "patient": "p-whatsapp",
+      "channel": "whatsapp",
+      "joinedAt": 1783943303760,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q030",
+      "patient": "p-voice",
+      "channel": "voice",
+      "joinedAt": 1783943303769,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q031",
+      "patient": "p-sms",
+      "channel": "sms",
+      "joinedAt": 1783943303778,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q032",
+      "patient": "p-qr",
+      "channel": "qr",
+      "joinedAt": 1783943303788,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q033",
+      "patient": "रोहन",
+      "channel": "whatsapp",
+      "joinedAt": 1783944170081,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q034",
+      "patient": "रोहन",
+      "channel": "voice",
+      "joinedAt": 1783944170100,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q035",
+      "patient": "रोहन",
+      "channel": "sms",
+      "joinedAt": 1783944170119,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q036",
+      "patient": "रोहन",
+      "channel": "message",
+      "joinedAt": 1783944170129,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q037",
+      "patient": "रोहन",
+      "channel": "qr",
+      "joinedAt": 1783944170138,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q038",
+      "patient": "रोहन",
+      "channel": "site",
+      "joinedAt": 1783944170147,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q039",
+      "patient": "रोहन",
+      "channel": "whatsapp",
+      "joinedAt": 1783944170156,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q040",
+      "patient": "रोहन",
+      "channel": "voice",
+      "joinedAt": 1783944170165,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q041",
+      "patient": "रोहन",
+      "channel": "sms",
+      "joinedAt": 1783944170174,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q042",
+      "patient": "रोहन",
+      "channel": "qr",
+      "joinedAt": 1783944170183,
+      "status": "waiting",
+      "phone": "+810000000000"
+    },
+    {
+      "id": "Q043",
+      "patient": "रोहन",
+      "channel": "whatsapp",
+      "joinedAt": 1783944170198,
+      "status": "waiting",
+      "phone": "+810000000000"
+    }
+  ],
+  "notifications": [
+    {
+      "ts": "2026-07-13T14:03:03.564Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:58:03.417Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:53:03.268Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:48:03.139Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:43:03.004Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:38:02.874Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:33:02.778Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:28:02.711Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:23:02.659Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:18:02.544Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:13:02.423Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:08:02.313Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T13:03:02.195Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:58:02.054Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:53:01.961Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:48:01.830Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:43:01.732Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:38:01.602Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:33:01.480Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:28:01.377Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:23:01.235Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:18:01.107Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:13:01.032Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:08:00.925Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:03:00.821Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 43
+    },
+    {
+      "ts": "2026-07-13T12:02:50.200Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 43,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.183Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 42,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.174Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 41,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.165Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 40,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.156Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 39,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.147Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 38,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.138Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 37,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.130Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 36,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.119Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 35,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.102Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 34,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T12:02:50.082Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 33,
+      "locale": "hi"
+    },
+    {
+      "ts": "2026-07-13T11:59:16.132Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 32
+    },
+    {
+      "ts": "2026-07-13T11:54:16.028Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 32
+    },
+    {
+      "ts": "2026-07-13T11:49:15.894Z",
+      "type": "surge-reminder",
+      "channel": "voice+sms",
+      "waiting": 32
+    },
+    {
+      "ts": "2026-07-13T11:48:23.788Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 32
+    },
+    {
+      "ts": "2026-07-13T11:48:23.779Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 31
+    },
+    {
+      "ts": "2026-07-13T11:48:23.769Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 30
+    },
+    {
+      "ts": "2026-07-13T11:48:23.760Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 29
+    },
+    {
+      "ts": "2026-07-13T11:48:23.750Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 28
+    },
+    {
+      "ts": "2026-07-13T11:48:23.741Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 27
+    },
+    {
+      "ts": "2026-07-13T11:48:23.733Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 26
+    },
+    {
+      "ts": "2026-07-13T11:48:23.724Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 25
+    },
+    {
+      "ts": "2026-07-13T11:48:23.715Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 24
+    },
+    {
+      "ts": "2026-07-13T11:48:23.701Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 23
+    },
+    {
+      "ts": "2026-07-13T11:46:46.789Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 22
+    },
+    {
+      "ts": "2026-07-13T11:46:46.779Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 21
+    },
+    {
+      "ts": "2026-07-13T11:46:46.770Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 20
+    },
+    {
+      "ts": "2026-07-13T11:46:46.761Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 19
+    },
+    {
+      "ts": "2026-07-13T11:46:46.752Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 18
+    },
+    {
+      "ts": "2026-07-13T11:46:46.743Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 17
+    },
+    {
+      "ts": "2026-07-13T11:46:46.732Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 16
+    },
+    {
+      "ts": "2026-07-13T11:46:46.723Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 15
+    },
+    {
+      "ts": "2026-07-13T11:46:46.714Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 14
+    },
+    {
+      "ts": "2026-07-13T11:46:46.702Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 13
+    },
+    {
+      "ts": "2026-07-13T11:43:25.546Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 12
+    },
+    {
+      "ts": "2026-07-13T09:39:10.350Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 11
+    },
+    {
+      "ts": "2026-07-13T09:39:02.734Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 10
+    },
+    {
+      "ts": "2026-07-13T09:39:02.725Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 9
+    },
+    {
+      "ts": "2026-07-13T09:39:02.713Z",
+      "type": "surge",
+      "channel": "voice+sms",
+      "waiting": 8
+    }
+  ],
+  "surge": {
+    "active": true,
+    "lastNotified": 1783951083419
+  },
+  "cfg": {
+    "surgeThreshold": 8
+  }
+}

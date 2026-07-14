@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-store" />
+<title>Aarogya Hospital — Staff Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e2a33;--teal:#0f9d8f;--teal2:#0b7d72;--bg:#f2f8f7;--card:#fff;--muted:#5c7079;--line:#e2eeeb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter','Noto Sans Devanagari',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,#0e2a33,#0f9d8f);color:#fff;padding:16px 0}
+.nav{display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:900;font-size:20px;display:flex;gap:8px;align-items:center}
+.nav a{color:#fff;text-decoration:none;background:rgba(255,255,255,.15);padding:7px 13px;border-radius:9px;font-size:13px;font-weight:600}
+.stats{display:flex;gap:14px;margin:24px 0;flex-wrap:wrap}
+.stat{flex:1;min-width:140px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat b{font-size:26px;font-weight:900;display:block;color:var(--teal2)}.stat span{font-size:12px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px;overflow:auto}
+h2{font-size:18px;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:#e8f7f4;color:var(--teal2)}
+button.act{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:6px 11px;font-weight:700;cursor:pointer;font-size:12px}
+.call{background:var(--teal2)}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:24px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><div class="brand">🏥 Aarogya — Staff</div><a href="http://129.121.122.53:8080/">← Portal</a></div></header>
+<div class="wrap">
+  <div class="stats" id="stats"></div>
+  <div class="card"><h2>Today's Appointments</h2><table id="tbl"><thead><tr><th>#Token</th><th>Patient</th><th>Phone</th><th>Department</th><th>Doctor</th><th>Slot</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+</div>
+<footer>Aarogya Hospital · Staff Dashboard · Powered by Nihon Offshore AI</footer>
+<script>
+async function load(){
+  const a=await (await fetch('/api/appointments',{headers:{'x-auth-token':(document.cookie.match(/dash=([^;]+)/)||[])[1]||''}})).json();
+  const st=await (await fetch('/api/stats')).json();
+  stats.innerHTML=`
+    <div class="stat"><b>${st.departments}</b><span>Departments</span></div>
+    <div class="stat"><b>${st.doctors}</b><span>Doctors</span></div>
+    <div class="stat"><b>${st.today}</b><span>Booked today</span></div>
+    <div class="stat"><b>${st.waiting}</b><span>Waiting</span></div>`;
+  tbl.querySelector('tbody').innerHTML=a.map(r=>`<tr><td><b>#${r.token}</b></td><td>${r.patient}</td><td>${r.phone}</td><td>${r.dept||'-'}</td><td>${r.doctor||'-'}</td><td>${r.slot||'-'}</td><td><span class="badge">${r.status}</span></td><td><button class="act call" onclick="done(${r.id})">Done</button></td></tr>`).join('');
+}
+async function done(id){await fetch('/api/appointment/status',{method:'POST',headers:{'Content-Type':'application/json','x-auth-token':(document.cookie.match(/dash=([^;]+)/)||[])[1]||''},body:JSON.stringify({id,status:'done'})});load();}
+load();setInterval(load,15000);
+</script>
+</body>
+</html>
