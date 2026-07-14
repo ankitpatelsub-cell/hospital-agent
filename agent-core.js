@@ -1,5 +1,22 @@
 // agent-core.js — Hospital Queue & Check-in Agent (bilingual EN/HI/JA, India-ready).
 const mem = require('./memory');
+let claudeTask = null;
+try { claudeTask = require('./claude_worker').claudeTask; } catch { /* optional */ }
+
+// Use local Claude CLI (free, authenticated) to parse a free-text patient message
+// into structured fields. Falls back to echoing the raw text if Claude unavailable.
+function understand(patient) {
+  if (!claudeTask || !patient || patient.length < 12) return null;
+  try {
+    const r = claudeTask(`Extract structured fields from this patient check-in message as JSON only: {"name":..., "phone":..., "complaint":...}. If missing, use "". Message: ${patient}`);
+    if (r.ok) {
+      const m = r.text.match(/\{[\s\S]*\}/);
+      if (m) return JSON.parse(m[0]);
+    }
+  } catch { /* ignore */ }
+  return null;
+}
+
 const I18N = {
   en: { think: 'intake via', joined: 'Queue number', eta: 'est', surge: 'High load', voice: 'Voice alert: long wait, please wait at home', sms: 'SMS: current wait is', come: 'please come a bit later', none: 'No one to call', call: 'please proceed to desk', notfound: 'Number not found', done: 'done' },
   hi: { think: 'इन्टेक', joined: 'कतार संख्या', eta: 'अनुमानित', surge: 'भीड़ अधिक', voice: 'आवाज़ संदेश: इंतज़ार लंबा, घर पर आराम करें', sms: 'SMS: वर्तमान इंतज़ार', come: 'थोड़ी देर बाद आएँ', none: 'कोई नहीं', call: 'डेस्क पर आएँ', notfound: 'संख्या नहीं मिली', done: 'पूर्ण' },
@@ -7,9 +24,12 @@ const I18N = {
 };
 function intake(patient, channel, locale = 'en') {
   const L = I18N[locale] || I18N.en;
+  const parsed = understand(patient);
+  const display = parsed && parsed.name ? parsed.name : patient;
   const entry = mem.joinQueue(patient, channel);
+  if (parsed) { try { mem.tagEntry(entry.id, parsed); } catch { /* ignore */ } }
   const steps = [
-    { tool: 'think', result: '(' + L.think + ') ' + channel + ': ' + patient },
+    { tool: 'think', result: '(' + L.think + ') ' + channel + ': ' + display },
     { tool: 'join', result: L.joined + ' ' + entry.id + ' (' + entry.channel + ')' },
   ];
   const pos = mem.position(entry.id);
