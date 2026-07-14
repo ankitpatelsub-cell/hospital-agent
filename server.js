@@ -30,6 +30,8 @@ const server = http.createServer(async (req, res) => {
     return send(res, 200, dept ? DB.doctorsByDept(dept) : DB.doctors());
   }
   if (req.method === 'GET' && url.pathname === '/api/stats') return send(res, 200, DB.stats());
+  if (req.method === 'GET' && url.pathname === '/api/state') return send(res, 200, DB.stats());
+  if (req.method === 'GET' && url.pathname === '/api/overview') return send(res, 200, DB.stats());
 
   // ---- Public booking (open) ----
   if (req.method === 'POST' && url.pathname === '/api/book') {
