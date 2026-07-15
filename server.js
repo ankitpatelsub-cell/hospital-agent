@@ -5,6 +5,7 @@ const path = require('path');
 const { intake, callNext, queryPosition, getMemory, checkSurge } = require('./agent-core');
 const { addNotification } = require('./memory');
 const DB = require('./db');
+const { handoff } = require('/root/shared/handoff');
 
 const PUBLIC = path.join(__dirname, 'public');
 const MIME = { '.html': 'text/html', '.js': 'application/javascript', '.css': 'text/css', '.json': 'application/json' };
@@ -44,6 +45,8 @@ const server = http.createServer(async (req, res) => {
     const r = DB.book(b);
     // Also push into live queue for surge tracking
     try { intake(b.patient, 'website', b.locale || 'en'); } catch {}
+    // Handoff: notify back-office agent to schedule a reminder / billing task
+    handoff('backoffice', { task: `Hospital appointment booked for ${b.patient} (${b.phone}) — dept ${b.dept || 'general'}. Send reminder + prepare billing.` });
     return send(res, 200, { ok: true, id: r.id, token: r.token, message: `Appointment confirmed. Your token is #${r.token}.` });
   }
 
