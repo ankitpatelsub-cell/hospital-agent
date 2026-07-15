@@ -32,6 +32,10 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'GET' && url.pathname === '/api/stats') return send(res, 200, DB.stats());
   if (req.method === 'GET' && url.pathname === '/api/state') return send(res, 200, DB.stats());
   if (req.method === 'GET' && url.pathname === '/api/overview') return send(res, 200, DB.stats());
+  if (req.method === 'GET' && url.pathname === '/api/memory') {
+    if (!authed()) return send(res, 401, { error: 'unauthorized' });
+    return send(res, 200, getMemory());
+  }
 
   // ---- Public booking (open) ----
   if (req.method === 'POST' && url.pathname === '/api/book') {
@@ -72,10 +76,6 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && url.pathname === '/api/appointment/status') {
     if (!authed()) return send(res, 401, { error: 'unauthorized' });
     const b = await body(); DB.setStatus(b.id, b.status); return send(res, 200, { ok: true });
-  }
-  if (req.method === 'GET' && url.pathname === '/api/state') {
-    if (!authed()) return send(res, 401, { error: 'unauthorized' });
-    return send(res, 200, getMemory());
   }
 
   // ---- Pages: / public, /admin gated ----
